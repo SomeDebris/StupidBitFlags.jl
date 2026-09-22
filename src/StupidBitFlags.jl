@@ -1,6 +1,6 @@
 module StupidBitFlags
 
-export bitflags
+export @bitflags
 
 """
 ```julia
@@ -20,6 +20,7 @@ the same value (`0x0`).
 macro bitflags(type, names...)
     for i in eachindex(names)
         name = names[i]
+        @eval export $name
         @eval const $name = $type(1) << ($i - 1)
     end
 end
